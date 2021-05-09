@@ -2,22 +2,23 @@
 // Created by andreea on 5/6/2021.
 //
 
-#ifndef MAIN_PANTALONI_H
-#define MAIN_PANTALONI_H
+#ifndef MAIN_PALTON_H
+#define MAIN_PALTON_H
+
 
 #include "Haine.h"
 
-class Pantaloni: public Haina {
+class Palton: public Haina {
 
 public:
     friend class Comanda;
-    Pantaloni();
+    Palton();
 
-    Pantaloni(const unsigned int& idComanda, const unsigned int &greutate, const int &tempMin, const  int &tempMax, const bool &culoare, const bool &greu);
+    Palton( const unsigned int &greutate, const int &tempMin, const  int &tempMax, const bool &culoare, const bool &greu);
 
-    Pantaloni(const Pantaloni &pantaloni);
+    Palton(const Palton &palton);
 
-    ~Pantaloni(){
+    ~Palton(){
         m_opearatiuni.clear();
     }
 
@@ -25,9 +26,7 @@ public:
 
     unsigned int getGreutate() const;
 
-    Pantaloni& operator=(const Pantaloni &pantaloni);
-
-    friend istream& operator>>(istream& in, Pantaloni &pantaloni);
+    friend istream& operator>>(istream& in, Palton& palton);
 
 private:
     static string m_tip;
@@ -44,5 +43,4 @@ private:
     unsigned int m_nrOp;
 };
 
-
-#endif //MAIN_PANTALONI_H
+#endif //MAIN_PALTON_H

@@ -10,12 +10,19 @@ using  namespace std;
 
 class Operatiune {
 public:
+    Operatiune();
 
+    Operatiune(string nume, const unsigned int &durata);
+
+    Operatiune(const Operatiune& op);
+
+    ~Operatiune()= default;
 
 
 private:
-    string nume;
-    unsigned int durata;
+    string m_nume;
+    unsigned int m_durata;
+
 
 };
 

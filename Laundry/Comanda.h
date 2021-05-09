@@ -6,7 +6,16 @@
 #define MAIN_COMANDA_H
 
 #include "Haine.h"
+#include "Spalatorie.h"
+#include "MasinaSpalat.h"
 #include <vector>
+#include "Pantaloni.h"
+#include "Camasa.h"
+#include "Rochie.h"
+#include "Costum.h"
+#include "Geaca.h"
+#include "Palton.h"
+#include "Sacou.h"
 
 using namespace std;
 
@@ -14,6 +23,7 @@ class Comanda {
 public:
     friend class Haina;
     friend class Spalatorie;
+    friend class MasinaSpalat;
     Comanda();
 
     Comanda(const unsigned int &id, const unsigned int & nrHaine, const vector <Haina*> &haine);

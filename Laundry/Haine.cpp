@@ -74,7 +74,7 @@ unsigned int Haina::getIdComanda() const {
     return m_idComanda;
 }
 
-void Haina::setMIdComanda(unsigned int idComanda) {
+void Haina::setIdComanda(unsigned int idComanda) {
     m_idComanda = idComanda;
 }
 
@@ -94,13 +94,13 @@ Haina &Haina::operator=(const Haina &o_haina){
     return *this;
 }
 
-bool Haina::operator==(const Haina &o_haina) const{
-    return m_tip == o_haina.m_tip &&
-            m_greutate == o_haina.m_greutate &&
-           m_tempMin == o_haina.m_tempMin &&
-           m_tempMax == o_haina.m_tempMax &&
-           m_culoare == o_haina.m_culoare;
-}
+//bool Haina::operator==(const Haina &o_haina) const{
+//    return m_tip == o_haina.m_tip &&
+//            m_greutate == o_haina.m_greutate &&
+//           m_tempMin == o_haina.m_tempMin &&
+//           m_tempMax == o_haina.m_tempMax &&
+//           m_culoare == o_haina.m_culoare;
+//}
 
 istream &operator>>(istream &in, Haina &haina) {
 
@@ -108,7 +108,7 @@ istream &operator>>(istream &in, Haina &haina) {
 
     string tip;
     in >> tip;
-    cout<<1;
+//    cout<<1;
     haina.m_tip = tip;
 
 
@@ -132,21 +132,12 @@ istream &operator>>(istream &in, Haina &haina) {
         haina.m_culoare = false;
     }
 
-    cout << "\nTemperatura minima: ";
+    cout << "\n Temperatura minima: ";
     in >> haina.m_tempMin;
 
-    cout << "\nTemperatura maxima: ";
+    cout << "\n Temperatura maxima: ";
     in >> haina.m_tempMax;
 
     return in;
 }
-
-const string &Haina::getTip() const {
-    return m_tip;
-}
-
-void Haina::setTip(const string &tip) {
-    Haina::m_tip = tip;
-}
-
 

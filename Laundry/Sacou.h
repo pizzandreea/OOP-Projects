@@ -1,23 +1,23 @@
 //
-// Created by andreea on 5/6/2021.
+// Created by andreea on 5/7/2021.
 //
 
-#ifndef MAIN_PANTALONI_H
-#define MAIN_PANTALONI_H
+#ifndef MAIN_SACOU_H
+#define MAIN_SACOU_H
 
 #include "Haine.h"
 
-class Pantaloni: public Haina {
+class Sacou: public Haina{
 
 public:
     friend class Comanda;
-    Pantaloni();
+    Sacou();
 
-    Pantaloni(const unsigned int& idComanda, const unsigned int &greutate, const int &tempMin, const  int &tempMax, const bool &culoare, const bool &greu);
+    Sacou( const unsigned int &greutate, const int &tempMin, const  int &tempMax, const bool &culoare, const bool &greu);
 
-    Pantaloni(const Pantaloni &pantaloni);
+    Sacou(const Sacou &o_camasa);
 
-    ~Pantaloni(){
+    ~Sacou(){
         m_opearatiuni.clear();
     }
 
@@ -25,11 +25,18 @@ public:
 
     unsigned int getGreutate() const;
 
-    Pantaloni& operator=(const Pantaloni &pantaloni);
+    int getTempMin() const ;
 
-    friend istream& operator>>(istream& in, Pantaloni &pantaloni);
+    int getTempMax() const ;
+
+    bool isCuloare() const;
+
+    Sacou& operator=(const Sacou &sacou);
+
+    friend istream& operator>>(istream& in, Sacou &sacou);
 
 private:
+
     static string m_tip;
     unsigned int m_idComanda;
     unsigned int m_greutate;
@@ -42,7 +49,8 @@ private:
 //    in urma spalarii haina isi va amintii
     vector <Operatiune*> m_opearatiuni;
     unsigned int m_nrOp;
+
 };
 
 
-#endif //MAIN_PANTALONI_H
+#endif //MAIN_SACOU_H

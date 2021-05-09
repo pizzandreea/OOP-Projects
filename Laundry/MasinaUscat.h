@@ -47,7 +47,7 @@ public:
 private:
     unsigned int m_id;
     const int m_capacitate;    // 35 de haine in masina
-    const int m_durata;          // 20 de min durata programului
+    const int m_durata;          // 20 de min m_durata programului
 
     unsigned int m_nrHaine;           // nr de haine din masina
     vector <Haina*> m_haine;         // hainele din masina

@@ -4,26 +4,36 @@
 #include "Operatiune.h"
 #include "MasinaSpalat.h"
 #include "MasinaStors.h"
+#include "Camasa.h"
+#include "Costum.h"
 
 using namespace std;
 
 int main() {
 
 //    Spalatorie
+//     masinile 5 din fiecare
     Spalatorie *spalatorie = spalatorie->getInstance();
 
-    spalatorie->adaugaComanda();
 
-//     masinile 5 din fiecare
+//    int i;
+//    do{
+        spalatorie->adaugaComanda();
+        spalatorie->procesareComanda();
+        spalatorie->spalare();
 
+//    }
+//    while (cin >> i);
 
-    MasinaSpalat *masina1, *masina2;
-
-    Haina haina1("Camasa", 1, 10, 10, false, false), *haina2 = new Haina("Camasa", 20, 10, 30, true, false);
-
-//    masina1->adaugaHaina(haina1);
 
 
 
     return 0;
 }
+
+//vector <Haina*> haine;
+//    MasinaSpalat *masina1 = new MasinaSpalat(1, 6, haine);
+//
+//    Camasa *camasa1 = new Camasa(1, 6, 10, 20, false, false);
+//
+//    cout << masina1->incapeHaina(camasa1);

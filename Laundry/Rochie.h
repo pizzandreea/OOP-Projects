@@ -2,22 +2,25 @@
 // Created by andreea on 5/6/2021.
 //
 
-#ifndef MAIN_PANTALONI_H
-#define MAIN_PANTALONI_H
+#ifndef MAIN_ROCHIE_H
+#define MAIN_ROCHIE_H
+
 
 #include "Haine.h"
 
-class Pantaloni: public Haina {
+using namespace std;
+
+class Rochie: public Haina {
 
 public:
     friend class Comanda;
-    Pantaloni();
+    Rochie();
 
-    Pantaloni(const unsigned int& idComanda, const unsigned int &greutate, const int &tempMin, const  int &tempMax, const bool &culoare, const bool &greu);
+    Rochie( const unsigned int &greutate, const int &tempMin, const  int &tempMax, const bool &culoare, const bool &greu);
 
-    Pantaloni(const Pantaloni &pantaloni);
+    Rochie(const Rochie &o_rochie);
 
-    ~Pantaloni(){
+    ~Rochie(){
         m_opearatiuni.clear();
     }
 
@@ -25,9 +28,8 @@ public:
 
     unsigned int getGreutate() const;
 
-    Pantaloni& operator=(const Pantaloni &pantaloni);
+    friend istream& operator>>(istream& in, Rochie &rochie);
 
-    friend istream& operator>>(istream& in, Pantaloni &pantaloni);
 
 private:
     static string m_tip;
@@ -43,6 +45,4 @@ private:
     vector <Operatiune*> m_opearatiuni;
     unsigned int m_nrOp;
 };
-
-
-#endif //MAIN_PANTALONI_H
+#endif //MAIN_ROCHIE_H

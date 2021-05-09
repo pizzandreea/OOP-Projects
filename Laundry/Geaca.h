@@ -2,22 +2,23 @@
 // Created by andreea on 5/6/2021.
 //
 
-#ifndef MAIN_PANTALONI_H
-#define MAIN_PANTALONI_H
+#ifndef MAIN_GEACA_H
+#define MAIN_GEACA_H
+
 
 #include "Haine.h"
 
-class Pantaloni: public Haina {
+class Geaca: public Haina {
 
 public:
     friend class Comanda;
-    Pantaloni();
+    Geaca();
 
-    Pantaloni(const unsigned int& idComanda, const unsigned int &greutate, const int &tempMin, const  int &tempMax, const bool &culoare, const bool &greu);
+    Geaca( const unsigned int &greutate, const int &tempMin, const  int &tempMax, const bool &culoare, const bool &greu);
 
-    Pantaloni(const Pantaloni &pantaloni);
+    Geaca(const Geaca &o_camasa);
 
-    ~Pantaloni(){
+    ~Geaca(){
         m_opearatiuni.clear();
     }
 
@@ -25,9 +26,7 @@ public:
 
     unsigned int getGreutate() const;
 
-    Pantaloni& operator=(const Pantaloni &pantaloni);
-
-    friend istream& operator>>(istream& in, Pantaloni &pantaloni);
+    friend istream& operator>>(istream& in, Geaca &geaca);
 
 private:
     static string m_tip;
@@ -45,4 +44,4 @@ private:
 };
 
 
-#endif //MAIN_PANTALONI_H
+#endif //MAIN_GEACA_H

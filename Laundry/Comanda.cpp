@@ -41,13 +41,77 @@ istream &operator>>(istream &in, Comanda &comanda) {
     cout << "\nArticole:";
 
     for(int i = 0; i < comanda.m_nrHaine; i++){
-        Haina *haina = new Haina;
+//        Haina *haina = new Haina;
 
         cout << "\n Articol " << i+1 << ": ";
 
-        in >> (*haina);
+//        in >> (*haina);
+        cout << "Tip: ";
+        string tip;
+        in >> tip;
 
-        comanda.m_haine.push_back(haina);
+        if (tip == "Pantaloni"){
+            Pantaloni *pantaloni = new Pantaloni;
+            in >> (*pantaloni);
+            pantaloni->setIdComanda(comanda.m_idComanda);
+            comanda.m_haine.push_back(new Pantaloni(*pantaloni));
+        } else if (tip == "Camasa"){
+                Camasa *camasa = new Camasa;
+
+                in >> (*camasa);
+
+                camasa->setIdComanda(comanda.m_idComanda);
+                comanda.m_haine.push_back(new Camasa(*camasa));
+            } else if (tip == "Geaca"){
+                    Geaca *geaca = new Geaca;
+
+                    in >> (*geaca);
+
+                    geaca->setIdComanda(comanda.m_idComanda);
+                    comanda.m_haine.push_back(new Geaca(*geaca));
+
+                } else if (tip == "Rochie"){
+                        Rochie *rochie = new Rochie;
+
+                        in >> (*rochie);
+
+                        rochie->setIdComanda(comanda.m_idComanda);
+                        comanda.m_haine.push_back(new Rochie(*rochie));
+                    } else if (tip == "Palton"){
+                            Palton *palton = new Palton;
+
+                            in >> (*palton);
+
+                            palton->setIdComanda(comanda.m_idComanda);
+                            comanda.m_haine.push_back(new Palton(*palton));
+                        } else if (tip == "Costum"){
+                                Costum *costum = new Costum;
+
+                                Pantaloni *pantaloni = new Pantaloni;
+                                Sacou *sacou = new Sacou;
+
+                                cout << "\nCostumul e format din:";
+
+                                cout << "\nSacou";
+
+                                in >> (*sacou);
+
+                                sacou->setIdComanda(comanda.m_idComanda);
+
+                                cout << "\nPantaloni";
+
+                                in >> (*pantaloni);
+
+                                pantaloni->setIdComanda(comanda.m_idComanda);
+
+                                comanda.m_haine.push_back(new Costum(comanda.m_idComanda, *pantaloni, *sacou));
+                            }
+
+
+
+//        comanda.m_haine.push_back(haina);
+
+//        if(haina->getTip() )
     }
     return in;
 

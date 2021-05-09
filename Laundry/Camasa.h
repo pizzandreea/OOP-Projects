@@ -1,31 +1,30 @@
 //
-// Created by andreea on 4/30/2021.
+// Created by andreea on 5/6/2021.
 //
 
-#ifndef MAIN_HAINE_H
-#define MAIN_HAINE_H
+#ifndef MAIN_CAMASA_H
+#define MAIN_CAMASA_H
 
-#include <string>
-#include "Operatiune.h"
-#include <vector>
-//#include "Comanda.h"
-class Comanda;
-class MasinaSpalat;
+
+#include "Haine.h"
 
 using namespace std;
 
-class Haina {
+class Camasa: public Haina {
+
 public:
-    friend class MasinaSpalat;
-    Haina();
+    friend class Comanda;
+    Camasa();
 
-    Haina(string tip, const unsigned int &greutate, const int &tempMin, const  int &tempMax, const bool &culoare, const bool &greu);
+    Camasa(const unsigned int &idComanda, const unsigned int &greutate, const int &tempMin, const  int &tempMax, const bool &culoare, const bool &greu);
 
-    Haina(const Haina &o_haina);
+    Camasa(const Camasa &o_camasa);
 
-    ~Haina(){
+    ~Camasa(){
         m_opearatiuni.clear();
     }
+
+    const string &getTip() const;
 
     unsigned int getGreutate() const;
 
@@ -49,20 +48,17 @@ public:
 
     unsigned int getIdComanda() const;
 
-    virtual void setIdComanda(unsigned int idComanda);
+    void setIdComanda(unsigned int idComanda);
 
-    Haina& operator=(const Haina &o_haina);
+    Camasa& operator=(const Camasa &o_camasa);
 
-//    bool operator==(const Haina &o_haina) const;
+    bool operator==(const Camasa &o_camasa) const;
 
-    friend istream& operator>>(istream& in, Haina &haina);
-
-
+    friend istream& operator>>(istream& in, Camasa &camasa);
 
 
 private:
-
-    string m_tip;
+    static string m_tip;
     unsigned int m_idComanda;
     unsigned int m_greutate;
     int m_tempMin;
@@ -71,10 +67,9 @@ private:
 
     bool m_greu;              // 0- usor 1- greu
 
-//    in urma spalarii haina isi va amintii
+//    in urma spalarii haina isi va aminti
     vector <Operatiune*> m_opearatiuni;
     unsigned int m_nrOp;
 };
 
-
-#endif //MAIN_HAINE_H
+#endif //MAIN_CAMASA_H

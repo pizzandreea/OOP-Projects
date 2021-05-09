@@ -48,7 +48,7 @@ private:
     unsigned int m_id;
     const int m_capacitate;    // exprimata fie in greutate/nr articole
 
-//    const int m_durata;          // durata programului in functie de tipul de masina
+//    const int m_durata;          // m_durata programului in functie de tipul de masina
 //    const int detergent;      pt masina de spalat
 
     unsigned int m_nrHaine;           // nr de haine din masina
