@@ -1,0 +1,299 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class I_IO{
+
+public:
+    virtual void citire(istream&) = 0;
+    virtual void afisare(ostream&) = 0;
+
+    friend istream& operator >>(istream& in, I_IO& ob)
+    {
+        ob.citire(in);
+        return in;
+    }
+    friend ostream& operator <<(ostream& out, I_IO& ob)
+    {
+        ob.afisare(out);
+        return out;
+    }
+};
+
+
+class Participant : public I_IO{
+
+protected:
+    static int index;
+    int m_id;
+    string m_nume;
+    string m_cnp;
+    int m_varsta;
+
+public:
+
+    Participant();
+    Participant(int id, int varsta, const string& nume, const string& cnp);
+
+    void citire(istream&);
+    void afisare(ostream&);
+
+    virtual ~Participant();
+
+    int getMVarsta() const;
+
+    const string &getMCnp() const;
+
+    friend istream &operator>>(istream &is, Participant &participant);
+
+    virtual void addCredite(int c);
+
+};
+
+int Participant::index = 0;
+
+
+Participant::Participant() : m_id(0), m_varsta(0), m_cnp(), m_nume(){
+
+}
+
+
+Participant::Participant(int id, int varsta, const string &nume, const string &cnp) : m_varsta(varsta), m_id(id), m_cnp(cnp), m_nume(nume){
+
+}
+
+void Participant::citire(istream &is) {
+
+    Participant::index++;
+    participant.m_id = Participant::index;
+
+    cout << "nume: ";
+    getline(is, participant.m_nume);
+
+    participant.m_cnp = "";
+    while(participant.m_cnp.size() != 13){
+        cout << "cnp: ";
+        is >> participant.m_cnp;
+    }
+
+    cout << "varsta: ";
+
+    is >> participant.m_varsta;
+
+    return is;
+}
+
+Participant::~Participant() {
+
+}
+
+int Participant::getMVarsta() const {
+    return m_varsta;
+}
+
+const string &Participant::getMCnp() const {
+    return m_cnp;
+}
+
+void Participant::addCredite(int c) {
+
+}
+
+struct data{
+    int zi, luna;
+};
+
+class Activitate{
+
+protected:
+    string m_denumire;
+    data m_data;
+    vector<Participant*> m_participanti;
+
+public:
+
+    virtual void addParticipant(Participant *participant);
+
+    friend istream &operator>>(istream &is, Activitate &activitate);
+};
+
+
+
+class Curs : public Activitate{
+
+    int m_credite;
+    int m_durata;
+
+public:
+
+    void addParticipant(Participant *participant) override {
+        m_participanti.push_back(participant);
+        participant->addCredite(m_credite);
+
+    }
+};
+
+
+
+
+class Profesor : public Participant{
+
+private:
+    int m_crediteTransferabile;
+
+public:
+
+    void addCredite(int c) override;
+};
+
+void Profesor::addCredite(int c) {
+
+    m_crediteTransferabile += c;
+}
+
+class Elev : public Participant{
+
+private:
+
+public:
+    void addCredite(int c) override;
+
+};
+
+void Elev::addCredite(int c) {
+
+}
+
+
+void Activitate::addParticipant(Participant *participant) {
+
+}
+
+istream &operator>>(istream &is, Activitate &activitate) {
+
+    cout << "\ndenumire: ";
+    getline(is, activitate.m_denumire);
+
+    cout << "\ndata activitatii: ";
+
+    is >> activitate.m_data.zi >> activitate.m_data.luna;
+
+    return is;
+}
+
+
+class Concurs : public Activitate{
+
+protected:
+    vector<Participant*> m_premianti;
+
+public:
+
+    void addParticipant(Participant *participant) override {
+        if(dynamic_cast<Elev*>(participant) != nullptr && participant->getMVarsta() >= 10 && participant->getMVarsta() <= 18){
+
+            for(auto *p:m_participanti){
+                if(p->getMCnp() == participant->getMCnp()){
+                    cout << "\nParticipantul deja este inscris la concurs";
+                    return;
+                }
+
+            }
+            m_participanti.push_back(participant);
+        }
+        else{
+            cout << "\nparticipantul nu este elev sau nu are varsta necesara ";
+        }
+    }
+};
+
+class ConcursOnline : public Activitate{
+
+};
+
+class ConcursOffline : public Activitate{
+
+};
+
+class Organizatie{
+private:
+    vector <Activitate*> m_activitati;
+/*
+ *
+ * TODO
+ *  * la persoana trebuie validare
+ *  * Iar clasa Participant, are autoincrement
+ *      id persoana si il autoincrementam
+ *  * functie virtuala de adaugat credite
+ *  TODO
+ *      * afisarea necesara pt toate clasele
+ *      * la data un struct cu luna si zi
+ *      * rezultatele pot fi map<Participant*, int> in Concurs
+ *      # constructori pt unele obiecte, pt ca aici le citim direct
+ *      * ?string plus operator << TODO Stefan
+ */
+
+public:
+    Organizatie();
+
+    void adaugareParticipanti(int n, Activitate *activitate);
+    void adaugareActivitate();
+
+};
+
+Organizatie::Organizatie(): m_activitati() {
+
+}
+
+void Organizatie::adaugareParticipanti(int n, Activitate *activitate) {
+
+    for(int i = 0; i < n; i++){
+        Participant *participant;
+        bool t;
+
+        cout << "Tip participant (0 = Elev, 1 = Profesor)";
+
+        cin >> t;
+
+        if ( t == 0){
+            participant = new Elev;
+
+            cin >> *dynamic_cast<Elev*>(participant);
+
+        } else {
+            participant = new Profesor;
+
+            cin >> *dynamic_cast<Profesor*>(participant);
+        }
+
+        activitate->addParticipant(participant);
+
+
+    }
+}
+
+void Organizatie::adaugareActivitate() {
+    Activitate *activitate;
+    cout << "\nTip activitate : \n 1 - Curs\n 2 - Concurs Online\n 3 - Concurs Offline \n";
+
+    int tip;
+
+    cin >> tip;
+
+    if(tip == 1){
+        activitate = new Curs;
+
+        cin >> *dynamic_cast<Curs*>(activitate);
+
+    }
+
+
+}
+
+int main() {
+    Organizatie *X = new Organizatie;
+
+    X->adaugareActivitate();
+
+    return 0;
+}
